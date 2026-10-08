@@ -1,11 +1,12 @@
 name: Build Android APK
 
 on:
-  workflow_dispatch: # This allows you to run the build manually
+  workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # Force GitHub to use an older server from 2020 that is compatible with older React Native apps
+    runs-on: ubuntu-20.04 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -13,13 +14,13 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '16'
 
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '11'
 
       - name: Install Dependencies
         run: yarn install
